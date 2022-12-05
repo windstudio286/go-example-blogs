@@ -21,6 +21,18 @@ func NewUserController(s service.UserService) UserController {
 	}
 }
 
+// @BasePath /api/v1
+
+// CreateUser godoc
+// @Summary      Create a user
+// @Description  Create a user by providing email and password
+// @Tags         Auth API
+// @Accept       json
+// @Produce      json
+// @Param Body body models.UserRegister true "The body to create a user"
+// @Success      200  {object}  utils.HTTPSucess
+// @Failure      400  {object}  utils.HTTPError
+// @Router       /auth/register [post]
 func (u *UserController) CreateUser(ctx *gin.Context) {
 	var user models.UserRegister
 	if err := ctx.ShouldBind(&user); err != nil {
@@ -39,6 +51,18 @@ func (u *UserController) CreateUser(ctx *gin.Context) {
 	utils.SuccessJSON(ctx, http.StatusOK, "Successfully Created user")
 }
 
+// @BasePath /api/v1
+
+// CreateUser godoc
+// @Summary      Login
+// @Description  Create a user by providing email and password
+// @Tags         Auth API
+// @Accept       json
+// @Produce      json
+// @Param Body body models.UserLogin true "The body to create a user"
+// @Success      200  {object}  utils.Response{data=string}
+// @Failure      400  {object}  utils.HTTPError
+// @Router       /auth/login [post]
 func (u *UserController) LoginUser(ctx *gin.Context) {
 	var user models.UserLogin
 	var hmacSampleSecret []byte

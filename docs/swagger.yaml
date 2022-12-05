@@ -1,0 +1,190 @@
+definitions:
+  models.Post:
+    properties:
+      body:
+        type: string
+      created_at:
+        example: "2022-12-04T01:38:48.247+07:00"
+        type: string
+      id:
+        type: integer
+      title:
+        type: string
+      updated_at:
+        example: "2022-12-04T01:38:48.247+07:00"
+        type: string
+    type: object
+  models.UserLogin:
+    properties:
+      email:
+        example: ttcong194@gmail.com
+        type: string
+      password:
+        example: a@123456
+        type: string
+    required:
+    - email
+    - password
+    type: object
+  models.UserRegister:
+    properties:
+      email:
+        example: ttcong194@gmail.com
+        type: string
+      firstName:
+        type: string
+      lastName:
+        type: string
+      password:
+        example: a@123456
+        type: string
+    required:
+    - email
+    - password
+    type: object
+  utils.HTTPError:
+    properties:
+      code:
+        example: 400
+        type: integer
+      msg:
+        example: status bad request
+        type: string
+    type: object
+  utils.HTTPSucess:
+    properties:
+      code:
+        example: 200
+        type: integer
+      msg:
+        example: status ok
+        type: string
+    type: object
+  utils.Response:
+    properties:
+      data: {}
+      message:
+        type: string
+      success:
+        type: boolean
+    type: object
+info:
+  contact: {}
+paths:
+  /auth/login:
+    post:
+      consumes:
+      - application/json
+      description: Create a user by providing email and password
+      parameters:
+      - description: The body to create a user
+        in: body
+        name: Body
+        required: true
+        schema:
+          $ref: '#/definitions/models.UserLogin'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/utils.Response'
+            - properties:
+                data:
+                  type: string
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/utils.HTTPError'
+      summary: Login
+      tags:
+      - Auth API
+  /auth/register:
+    post:
+      consumes:
+      - application/json
+      description: Create a user by providing email and password
+      parameters:
+      - description: The body to create a user
+        in: body
+        name: Body
+        required: true
+        schema:
+          $ref: '#/definitions/models.UserRegister'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/utils.HTTPSucess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/utils.HTTPError'
+      summary: Create a user
+      tags:
+      - Auth API
+  /posts/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Create a user by providing email and password
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/utils.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/models.Post'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/utils.HTTPError'
+      summary: Delete Post By Id
+      tags:
+      - Post API
+    get:
+      consumes:
+      - application/json
+      description: Create a user by providing email and password
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/utils.Response'
+            - properties:
+                Data:
+                  $ref: '#/definitions/models.Post'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/utils.HTTPError'
+      summary: Get Post By Id
+      tags:
+      - Post API
+swagger: "2.0"

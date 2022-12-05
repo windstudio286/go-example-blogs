@@ -67,6 +67,19 @@ func (p *PostController) AddPost(ctx *gin.Context) {
 	utils.SuccessJSON(ctx, http.StatusCreated, "Successfully Created Post")
 }
 
+// @BasePath /api/v1
+
+// CreateUser godoc
+// @Summary      Get Post By Id
+// @Version      2.0
+// @Description  Create a user by providing email and password
+// @Tags         Post API
+// @Accept       json
+// @Produce      json
+// @Param        id   path      int  true  "User ID"
+// @Success      200  {object}  utils.Response{Data=models.Post}
+// @Failure      400  {object}  utils.HTTPError
+// @Router       /posts/{id} [get]
 func (p *PostController) GetPost(ctx *gin.Context) {
 	idParam := ctx.Param("id")
 	id, err := strconv.ParseInt(idParam, 10, 64)
@@ -91,6 +104,19 @@ func (p *PostController) GetPost(ctx *gin.Context) {
 	})
 }
 
+// @BasePath /api/v1
+
+// CreateUser godoc
+// @Summary      Delete Post By Id
+// @Version      2.0
+// @Description  Create a user by providing email and password
+// @Tags         Post API
+// @Accept       json
+// @Produce      json
+// @Param        id   path      int  true  "User ID"
+// @Success      200  {object}  utils.Response{data=models.Post}
+// @Failure      400  {object}  utils.HTTPError
+// @Router       /posts/{id} [delete]
 func (p *PostController) DeletePost(ctx *gin.Context) {
 	idParam := ctx.Param("id")
 	id, err := strconv.ParseInt(idParam, 10, 64) //type conversion string to uint64

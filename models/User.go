@@ -18,13 +18,13 @@ func (user *User) TableName() string {
 }
 
 type UserLogin struct {
-	Email    string `form:"email" binding:"required"`
-	Password string `form:"password" binding:"required"`
+	Email    string `form:"email" binding:"required" example:"ttcong194@gmail.com"`
+	Password string `form:"password" binding:"required" example:"a@123456"`
 }
 
 type UserRegister struct {
-	Email     string `form:"email" json:"email" binding:"required"`
-	Password  string `form:"password" json:"password" binding:"required"`
+	Email     string `form:"email" json:"email" binding:"required" example:"ttcong194@gmail.com"`
+	Password  string `form:"password" json:"password" binding:"required" example:"a@123456"`
 	FirstName string `form:"first_name"`
 	LastName  string `form:"last_name"`
 }

@@ -6,8 +6,8 @@ type Post struct {
 	ID        int64     `gorm:"primary_key;auto_increment" json:"id"`
 	Title     string    `gorm:"size:200" json:"title"`
 	Body      string    `gorm:"size:3000" json:"body"`
-	CreatedAt time.Time `json:"created_at,omitempty"`
-	UpdatedAt time.Time `json:"updated_at,omitempty"`
+	CreatedAt time.Time `json:"created_at,omitempty" example:"2022-12-04T01:38:48.247+07:00"`
+	UpdatedAt time.Time `json:"updated_at,omitempty" example:"2022-12-04T01:38:48.247+07:00"`
 }
 
 func (post *Post) TableName() string {

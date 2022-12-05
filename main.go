@@ -9,6 +9,9 @@ import (
 	"blogs/models"
 	"fmt"
 	"unsafe"
+
+	swaggerfiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
 func init() {
@@ -35,8 +38,9 @@ func main() {
 
 	//Dòng này sẽ config và đồng bộ với DB từ model
 	db.DB.AutoMigrate(&models.Post{}, &models.User{})
-
+	router.Gin.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
 	router.Gin.Run(":8000")
+
 }
 
 func main1() {

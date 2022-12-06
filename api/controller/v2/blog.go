@@ -1,4 +1,4 @@
-package controller
+package v1
 
 import (
 	"blogs/api/service"
@@ -67,11 +67,8 @@ func (p *PostController) AddPost(ctx *gin.Context) {
 	utils.SuccessJSON(ctx, http.StatusCreated, "Successfully Created Post")
 }
 
-// @BasePath /api/v1
-
 // CreateUser godoc
-// @Summary      Get Post By Id
-// @Version      2.0
+// @Summary      APIv2 Get Post By Id
 // @Description  Create a user by providing email and password
 // @Tags         Post API
 // @Accept       json
@@ -104,11 +101,8 @@ func (p *PostController) GetPost(ctx *gin.Context) {
 	})
 }
 
-// @BasePath /api/v1
-
 // CreateUser godoc
-// @Summary      Delete Post By Id
-// @Version      2.0
+// @Summary      APIv2 Delete Post By Id
 // @Description  Create a user by providing email and password
 // @Tags         Post API
 // @Accept       json

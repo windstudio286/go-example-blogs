@@ -1,4 +1,4 @@
-package controller
+package v1
 
 import (
 	"blogs/api/service"
@@ -21,10 +21,8 @@ func NewUserController(s service.UserService) UserController {
 	}
 }
 
-// @BasePath /api/v1
-
 // CreateUser godoc
-// @Summary      Create a user
+// @Summary      APIv1 Create a user
 // @Description  Create a user by providing email and password
 // @Tags         Auth API
 // @Accept       json
@@ -51,10 +49,8 @@ func (u *UserController) CreateUser(ctx *gin.Context) {
 	utils.SuccessJSON(ctx, http.StatusOK, "Successfully Created user")
 }
 
-// @BasePath /api/v1
-
 // CreateUser godoc
-// @Summary      Login
+// @Summary      APIv1 Login
 // @Description  Create a user by providing email and password
 // @Tags         Auth API
 // @Accept       json

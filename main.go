@@ -1,10 +1,13 @@
 package main
 
 import (
-	"blogs/api/controller"
+	v1Controller "blogs/api/controller/v1"
+	v2Controller "blogs/api/controller/v2"
 	"blogs/api/repository"
-	"blogs/api/routes"
+	v1Routes "blogs/api/routes/v1"
+	v2Routes "blogs/api/routes/v2"
 	"blogs/api/service"
+	_ "blogs/docs"
 	"blogs/infrastructure"
 	"blogs/models"
 	"fmt"
@@ -24,21 +27,31 @@ func main() {
 	db := infrastructure.NewDatabase()
 	postRepository := repository.NewPostRepository(db)
 	postService := service.NewPostService(postRepository)
-	postController := controller.NewPostController(postService)
+	v1PostController := v1Controller.NewPostController(postService)
 
-	postRoute := routes.NewPostRouter(postController, router)
-	postRoute.Setup()
+	v1PostRoute := v1Routes.NewPostRouter(v1PostController, router)
+	v1PostRoute.Setup()
+
+	v2PostController := v2Controller.NewPostController(postService)
+
+	v2PostRoute := v2Routes.NewPostRouter(v2PostController, router)
+	v2PostRoute.Setup()
 
 	// add config for user
 	userRepository := repository.NewUserRepository(db)
 	userService := service.NewUserSerivce(userRepository)
-	userController := controller.NewUserController(userService)
-	userRouter := routes.NewUserRoute(userController, router)
-	userRouter.Setup()
+	v1UserController := v1Controller.NewUserController(userService)
+	v1UserRouter := v1Routes.NewUserRoute(v1UserController, router)
+	v1UserRouter.Setup()
+
+	v2UserController := v2Controller.NewUserController(userService)
+	v2UserRouter := v2Routes.NewUserRoute(v2UserController, router)
+	v2UserRouter.Setup()
 
 	//Dòng này sẽ config và đồng bộ với DB từ model
 	db.DB.AutoMigrate(&models.Post{}, &models.User{})
-	router.Gin.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
+	router.Gin.GET("/swagger/v1/*any", ginSwagger.WrapHandler(swaggerfiles.NewHandler(), ginSwagger.InstanceName("v1")))
+	router.Gin.GET("/swagger/v2/*any", ginSwagger.WrapHandler(swaggerfiles.NewHandler(), ginSwagger.InstanceName("v2")))
 	router.Gin.Run(":8000")
 
 }

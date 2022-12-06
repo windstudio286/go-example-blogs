@@ -1,3 +1,4 @@
+basePath: /v2
 definitions:
   models.Post:
     properties:
@@ -69,7 +70,17 @@ definitions:
         type: boolean
     type: object
 info:
-  contact: {}
+  contact:
+    email: ttcong194@gmail.com
+    name: API Support
+    url: http://www.swagger.io/support
+  description: This is a sample server.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: Blog API
+  version: "2.0"
 paths:
   /auth/login:
     post:
@@ -99,7 +110,7 @@ paths:
           description: Bad Request
           schema:
             $ref: '#/definitions/utils.HTTPError'
-      summary: Login
+      summary: APIv2 Login
       tags:
       - Auth API
   /auth/register:
@@ -125,7 +136,7 @@ paths:
           description: Bad Request
           schema:
             $ref: '#/definitions/utils.HTTPError'
-      summary: Create a user
+      summary: APIv2 Create a user
       tags:
       - Auth API
   /posts/{id}:
@@ -155,7 +166,7 @@ paths:
           description: Bad Request
           schema:
             $ref: '#/definitions/utils.HTTPError'
-      summary: Delete Post By Id
+      summary: APIv2 Delete Post By Id
       tags:
       - Post API
     get:
@@ -184,7 +195,7 @@ paths:
           description: Bad Request
           schema:
             $ref: '#/definitions/utils.HTTPError'
-      summary: Get Post By Id
+      summary: APIv2 Get Post By Id
       tags:
       - Post API
 swagger: "2.0"

@@ -4,13 +4,22 @@ package docs
 
 import "github.com/swaggo/swag"
 
-const docTemplate = `{
+const docTemplatev2 = `{
     "schemes": {{ marshal .Schemes }},
     "swagger": "2.0",
     "info": {
         "description": "{{escape .Description}}",
         "title": "{{.Title}}",
-        "contact": {},
+        "termsOfService": "http://swagger.io/terms/",
+        "contact": {
+            "name": "API Support",
+            "url": "http://www.swagger.io/support",
+            "email": "ttcong194@gmail.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
         "version": "{{.Version}}"
     },
     "host": "{{.Host}}",
@@ -28,7 +37,7 @@ const docTemplate = `{
                 "tags": [
                     "Auth API"
                 ],
-                "summary": "Login",
+                "summary": "APIv2 Login",
                 "parameters": [
                     {
                         "description": "The body to create a user",
@@ -80,7 +89,7 @@ const docTemplate = `{
                 "tags": [
                     "Auth API"
                 ],
-                "summary": "Create a user",
+                "summary": "APIv2 Create a user",
                 "parameters": [
                     {
                         "description": "The body to create a user",
@@ -120,7 +129,7 @@ const docTemplate = `{
                 "tags": [
                     "Post API"
                 ],
-                "summary": "Get Post By Id",
+                "summary": "APIv2 Get Post By Id",
                 "parameters": [
                     {
                         "type": "integer",
@@ -168,7 +177,7 @@ const docTemplate = `{
                 "tags": [
                     "Post API"
                 ],
-                "summary": "Delete Post By Id",
+                "summary": "APIv2 Delete Post By Id",
                 "parameters": [
                     {
                         "type": "integer",
@@ -311,18 +320,18 @@ const docTemplate = `{
     }
 }`
 
-// SwaggerInfo holds exported Swagger Info so clients can modify it
-var SwaggerInfo = &swag.Spec{
-	Version:          "",
+// SwaggerInfov2 holds exported Swagger Info so clients can modify it
+var SwaggerInfov2 = &swag.Spec{
+	Version:          "2.0",
 	Host:             "",
-	BasePath:         "",
+	BasePath:         "/v2",
 	Schemes:          []string{},
-	Title:            "",
-	Description:      "",
-	InfoInstanceName: "swagger",
-	SwaggerTemplate:  docTemplate,
+	Title:            "Blog API",
+	Description:      "This is a sample server.",
+	InfoInstanceName: "v2",
+	SwaggerTemplate:  docTemplatev2,
 }
 
 func init() {
-	swag.Register(SwaggerInfo.InstanceName(), SwaggerInfo)
+	swag.Register(SwaggerInfov2.InstanceName(), SwaggerInfov2)
 }

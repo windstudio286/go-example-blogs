@@ -1,17 +1,17 @@
-package routes
+package v2
 
 import (
-	"blogs/api/controller"
+	v2Controller "blogs/api/controller/v2"
 	"blogs/infrastructure"
 )
 
 type UserRoute struct {
 	Handler    infrastructure.GinRouter
-	Controller controller.UserController
+	Controller v2Controller.UserController
 }
 
 func NewUserRoute(
-	controller controller.UserController,
+	controller v2Controller.UserController,
 	handler infrastructure.GinRouter,
 ) UserRoute {
 	return UserRoute{
@@ -21,7 +21,7 @@ func NewUserRoute(
 }
 
 func (u UserRoute) Setup() {
-	v1 := u.Handler.Gin.Group("/api/v1")
+	v1 := u.Handler.Gin.Group("/v2")
 	{
 		user := v1.Group("/auth")
 		{
